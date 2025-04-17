@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOGO Offer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 400px;
+      width: 100%;
+    }
+    h2 {
+      color: #f772a1;
+      text-align: center;
+    }
+    .card {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      position: relative;
+    }
+    .card.active {
+      border: 2px solid #f772a1;
+      background-color: #fff5f9;
+    }
+    .badge {
+      background-color: #f772a1;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+    .most-popular {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-color: #f772a1;
+      color: white;
+      padding: 2px 10px;
+      font-size: 12px;
+      border-bottom-left-radius: 8px;
+      font-weight: bold;
+    }
+    .price {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .old-price {
+      text-decoration: line-through;
+      color: gray;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    .selector {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .selector select {
+      padding: 4px;
+      font-size: 14px;
+      margin-right: 5px;
+    }
+    .footer {
+      text-align: right;
+      margin-top: 10px;
+    }
+    .free-delivery {
+      color: #f772a1;
+      font-weight: bold;
+    }
+    .add-cart-btn {
+      width: 100%;
+      background-color: #f772a1;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .radio {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>YAY! It's BOGO</h2>
+
+    <div class="card active" onclick="selectPlan(1)">
+      <input type="radio" name="plan" class="radio" checked>
+      <strong>1 Unit</strong> <span class="badge">10% Off</span>
+      <div class="price">$10.00 USD <span class="old-price">$24.00 USD</span></div>
+      <div>Standard Price</div>
+    </div>
+
+    <div class="card" onclick="selectPlan(2)" id="two-unit">
+      <input type="radio" name="plan" class="radio">
+      <strong>2 Unit</strong> <span class="badge">20% Off</span>
+      <span class="most-popular">MOST POPULAR</span>
+      <div class="price">$18.00 USD <span class="old-price">$24.00 USD</span></div>
+
+      <div class="selector">
+        <div>
+          #1
+          <select id="size1">
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+          </select>
+          <select id="color1">
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+            <option value="Red">Red</option>
+          </select>
+        </div>
+        <div>
+          #2
+          <select id="size2">
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+          </select>
+          <select id="color2">
+            <option value="">Colour</option>
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+            <option value="Red">Red</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="selectPlan(3)">
+      <input type="radio" name="plan" class="radio">
+      <strong>3 Unit</strong> <span class="badge">30% Off</span>
+      <div class="price">$24.00 USD <span class="old-price">$24.00 USD</span></div>
+    </div>
+
+    <div class="footer">
+      <div class="free-delivery">Free Delivery</div>
+      <div>Total : <strong id="totalPrice">$10.00 USD</strong></div>
+    </div>
+
+    <button class="add-cart-btn">+ Add to Cart</button>
+  </div>
+
+  <script>
+    function selectPlan(plan) {
+      const cards = document.querySelectorAll('.card');
+      const radios = document.querySelectorAll('input[name="plan"]');
+      cards.forEach(card => card.classList.remove('active'));
+      cards[plan - 1].classList.add('active');
+      radios[plan - 1].checked = true;
+
+      let total = 0;
+      if (plan === 1) total = 10;
+      else if (plan === 2) total = 18;
+      else if (plan === 3) total = 24;
+
+      document.getElementById('totalPrice').textContent = `$${total}.00 USD`;
+    }
+  </script>
+</body>
+</html>
